@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: Movie-Ticket-Booking-System-API
+  datasource:
+    url: jdbc:mysql://localhost:3306/movie_ticket_booking_systemdb?createDatabaseIfNotExist=true
+    username: root
+    password: mysql@40
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+    open-in-view: false # this line is to don't show the warnings
+#server:
+#  port: 8081
