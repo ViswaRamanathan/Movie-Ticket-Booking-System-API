@@ -1,10 +1,12 @@
 package com.example.mtbs.service.impl;
 
 
+import com.example.mtbs.dto.UserRegistrationRequest;
 import com.example.mtbs.entity.TheaterOwner;
 import com.example.mtbs.entity.User;
 import com.example.mtbs.entity.UserDetails;
 import com.example.mtbs.enums.Role;
+import com.example.mtbs.mapper.UserRegistrationMapper;
 import com.example.mtbs.repository.UserRepository;
 import com.example.mtbs.service.UserService;
 import com.example.mtbs.exception.UserAlreadyExistByEmailException;
@@ -17,25 +19,19 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
 
+    private final UserRegistrationMapper userRegistrationMapper;
+
     @Override
-    public UserDetails saveUser(UserDetails userDetails) {
-        if(userRepository.existsByEmail(userDetails.getEmail())) {
-            throw new UserAlreadyExistByEmailException("There is a user already registered with this email "+userDetails.getEmail());
+    public UserDetails saveUser(UserRegistrationRequest userRegistrationRequest) {
+        if(userRepository.existsByEmail(userRegistrationRequest.email())) {
+            throw new UserAlreadyExistByEmailException("There is a user already registered with this email "+userRegistrationRequest.email());
         }
         else{
-            UserDetails newUser;
-            if(userDetails.getRole() == Role.USER){
-                newUser = new User();
+            if(userRegistrationRequest.role() == Role.USER){
+                return userRepository.save(userRegistrationMapper.toUser(userRegistrationRequest));
             } else {
-                newUser = new TheaterOwner();
+                return userRepository.save(userRegistrationMapper.toTheaterOwner(userRegistrationRequest));
             }
-            newUser.setUsername(userDetails.getUsername());
-            newUser.setEmail(userDetails.getEmail());
-            newUser.setPassword(userDetails.getPassword());
-            newUser.setRole(userDetails.getRole());
-            newUser.setDateOfBirth(userDetails.getDateOfBirth());
-            newUser.setPhoneNumber(userDetails.getPhoneNumber());
-            return userRepository.save(newUser);
         }
     }
 }
