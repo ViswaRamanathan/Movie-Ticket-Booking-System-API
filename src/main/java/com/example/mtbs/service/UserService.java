@@ -1,8 +1,9 @@
 package com.example.mtbs.service;
 
+import com.example.mtbs.dto.UserRegistrationRequest;
 import com.example.mtbs.entity.UserDetails;
 
 public interface UserService {
 
-    public UserDetails saveUser(UserDetails userDetails);
+    public UserDetails saveUser(UserRegistrationRequest userRegistrationRequest);
 }
