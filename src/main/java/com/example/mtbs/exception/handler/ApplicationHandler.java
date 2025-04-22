@@ -1,6 +1,7 @@
 package com.example.mtbs.exception.handler;
 
 import com.example.mtbs.exception.UserAlreadyExistByEmailException;
+import com.example.mtbs.exception.UserDoesNotExistByEmailException;
 import com.example.mtbs.utility.ErrorStructure;
 import com.example.mtbs.utility.ResponseBuilder;
 import org.springframework.http.HttpStatus;
@@ -20,6 +21,11 @@ public class ApplicationHandler {
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseEntity<ErrorStructure<String>> handleInvalidEnum(HttpMessageNotReadableException r){
         return ResponseBuilder.errorResponse(r.getMessage(), "Role does not exist", HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<ErrorStructure<String>> handleUserDoesNotExistByEmailException(UserDoesNotExistByEmailException ue){
+        return ResponseBuilder.errorResponse(ue.getMessage(), "Email does not exist", HttpStatus.CONFLICT);
     }
 
 }
