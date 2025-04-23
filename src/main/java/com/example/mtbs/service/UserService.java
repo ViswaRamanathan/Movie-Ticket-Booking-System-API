@@ -10,4 +10,6 @@ public interface UserService {
     public UserDetails saveUser(UserRegistrationRequest userRegistrationRequest);
 
     public UserUpdationResponse updateUser(String email, UserUpdationRequest userUpdationRequest);
+
+    public String deactivateUser(String email);
 }

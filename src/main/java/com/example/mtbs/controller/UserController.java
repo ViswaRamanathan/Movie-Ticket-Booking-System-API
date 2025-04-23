@@ -4,7 +4,6 @@ import com.example.mtbs.dto.UserRegistrationRequest;
 import com.example.mtbs.dto.UserRegistrationResponse;
 import com.example.mtbs.dto.UserUpdationRequest;
 import com.example.mtbs.dto.UserUpdationResponse;
-import com.example.mtbs.entity.UserDetails;
 import com.example.mtbs.mapper.UserRegistrationMapper;
 import com.example.mtbs.service.UserService;
 import com.example.mtbs.utility.ResponseBuilder;
@@ -31,4 +30,10 @@ public class UserController {
     public ResponseEntity<ResponseStructure<UserUpdationResponse>> updateUser(String email, @RequestBody UserUpdationRequest userUpdationRequest) {
         return ResponseBuilder.successResponse(userService.updateUser(email, userUpdationRequest), "User updated successfully", HttpStatus.OK);
     }
+
+    @DeleteMapping("/delete/{email}")
+    public ResponseEntity<ResponseStructure<String>> deactivateUser(@PathVariable String email) {
+        return ResponseBuilder.successResponse(userService.deactivateUser(email), "User deactivated successfully", HttpStatus.OK);
+    }
+
 }

@@ -51,4 +51,17 @@ public class UserServiceImpl implements UserService {
             throw new UserDoesNotExistByEmailException("There is no user registered with this email "+email);
         }
     }
+
+    @Override
+    public String deactivateUser(String email) {
+        if(userRepository.existsByEmail(email)) {
+            UserDetails userDetails = userRepository.findByEmail(email);
+            userDetails.setDeleted(true);
+            userRepository.save(userDetails);
+            return "User deactivated successfully";
+        }
+        else{
+            throw new UserDoesNotExistByEmailException("There is no user registered with this email "+email);
+        }
+    }
 }
