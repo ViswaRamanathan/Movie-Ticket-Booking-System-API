@@ -15,7 +15,6 @@ public class UserUpdationMapper {
         userDetail.setUsername(uur.username());
         userDetail.setDateOfBirth(uur.dateOfBirth());
         userDetail.setPhoneNumber(uur.phoneNumber());
-        userDetail.setEmail(uur.email());
     }
 
     public User toUser(UserUpdationRequest uur) {
