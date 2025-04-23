@@ -1,15 +1,13 @@
 package com.example.mtbs.service.impl;
 
-
 import com.example.mtbs.dto.UserRegistrationRequest;
 import com.example.mtbs.dto.UserUpdationRequest;
 import com.example.mtbs.dto.UserUpdationResponse;
-import com.example.mtbs.entity.TheaterOwner;
-import com.example.mtbs.entity.User;
 import com.example.mtbs.entity.UserDetails;
 import com.example.mtbs.enums.Role;
 import com.example.mtbs.exception.UserDoesNotExistByEmailException;
 import com.example.mtbs.mapper.UserRegistrationMapper;
+import com.example.mtbs.mapper.UserUpdationMapper;
 import com.example.mtbs.repository.UserRepository;
 import com.example.mtbs.service.UserService;
 import com.example.mtbs.exception.UserAlreadyExistByEmailException;
@@ -23,6 +21,8 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
 
     private final UserRegistrationMapper userRegistrationMapper;
+
+    private final UserUpdationMapper userUpdationMapper;
 
     @Override
     public UserDetails saveUser(UserRegistrationRequest userRegistrationRequest) {
@@ -45,13 +45,7 @@ public class UserServiceImpl implements UserService {
             userDetails.setUsername(userUpdationRequest.username());
             userDetails.setDateOfBirth(userUpdationRequest.dateOfBirth());
             userDetails.setPhoneNumber(userUpdationRequest.phoneNumber());
-            userDetails = userRepository.save(userDetails);
-            return new UserUpdationResponse(
-                    userDetails.getEmail(),
-                    userDetails.getUsername(),
-                    userDetails.getPhoneNumber(),
-                    userDetails.getDateOfBirth()
-            );
+            return userUpdationMapper.toUserUpdationResponse(userRepository.save(userDetails));
         }
         else{
             throw new UserDoesNotExistByEmailException("There is no user registered with this email "+userUpdationRequest.email());

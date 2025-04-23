@@ -6,6 +6,7 @@ public record UserUpdationResponse(
         String email,
         String username,
         String phoneNumber,
-        LocalDate dateOfBirth
+        LocalDate dateOfBirth,
+        long updatedAt
 ) {
 }

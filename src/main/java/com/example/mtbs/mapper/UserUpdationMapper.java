@@ -6,7 +6,9 @@ import com.example.mtbs.dto.UserUpdationResponse;
 import com.example.mtbs.entity.TheaterOwner;
 import com.example.mtbs.entity.User;
 import com.example.mtbs.entity.UserDetails;
+import org.springframework.stereotype.Component;
 
+@Component
 public class UserUpdationMapper {
 
     private void populateCommonFields(UserDetails userDetail, UserUpdationRequest uur) {
@@ -33,7 +35,8 @@ public class UserUpdationMapper {
                 userDetails.getUserId(),
                 userDetails.getUsername(),
                 userDetails.getPhoneNumber(),
-                userDetails.getDateOfBirth()
+                userDetails.getDateOfBirth(),
+                userDetails.getUpdatedAt()
         );
     }
 }
