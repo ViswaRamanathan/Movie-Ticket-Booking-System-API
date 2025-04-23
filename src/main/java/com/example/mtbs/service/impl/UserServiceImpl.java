@@ -39,16 +39,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserUpdationResponse updateUser(UserUpdationRequest userUpdationRequest) {
-        if(userRepository.existsByEmail(userUpdationRequest.email())) {
-            UserDetails userDetails = userRepository.findByEmail(userUpdationRequest.email());
+    public UserUpdationResponse updateUser(String email, UserUpdationRequest userUpdationRequest) {
+        if(userRepository.existsByEmail(email)) {
+            UserDetails userDetails = userRepository.findByEmail(email);
             userDetails.setUsername(userUpdationRequest.username());
             userDetails.setDateOfBirth(userUpdationRequest.dateOfBirth());
             userDetails.setPhoneNumber(userUpdationRequest.phoneNumber());
             return userUpdationMapper.toUserUpdationResponse(userRepository.save(userDetails));
         }
         else{
-            throw new UserDoesNotExistByEmailException("There is no user registered with this email "+userUpdationRequest.email());
+            throw new UserDoesNotExistByEmailException("There is no user registered with this email "+email);
         }
     }
 
