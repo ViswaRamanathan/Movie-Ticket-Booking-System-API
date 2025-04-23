@@ -27,7 +27,7 @@ public class UserController {
         return ResponseBuilder.successResponse(userRegistrationMapper.toUserDetails(userService.saveUser(userRegistrationRequest)),"User created successfully", HttpStatus.CREATED);
     }
 
-    @PutMapping("/register")
+    @PutMapping("/update")
     public ResponseEntity<ResponseStructure<UserUpdationResponse>> updateUser(String email, @RequestBody UserUpdationRequest userUpdationRequest) {
         return ResponseBuilder.successResponse(userService.updateUser(email, userUpdationRequest), "User updated successfully", HttpStatus.OK);
     }
