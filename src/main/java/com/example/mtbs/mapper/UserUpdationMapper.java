@@ -10,22 +10,15 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserUpdationMapper {
 
-    private void populateCommonFields(UserDetails userDetail, UserUpdationRequest uur) {
-        userDetail.setUsername(uur.username());
-        userDetail.setDateOfBirth(uur.dateOfBirth());
-        userDetail.setPhoneNumber(uur.phoneNumber());
-    }
-
-    public User toUser(UserUpdationRequest uur) {
-        User user = new User();
-        populateCommonFields(user, uur);
-        return user;
-    }
-
-    public TheaterOwner toTheaterOwner(UserUpdationRequest uur) {
-        TheaterOwner theaterOwner = new TheaterOwner();
-        populateCommonFields(theaterOwner, uur);
-        return theaterOwner;
+    public UserDetails toUserDetails(UserUpdationRequest uur) {
+        UserDetails userDetails = new UserDetails();
+        if(uur.username() != null)
+            userDetails.setUsername(uur.username());
+        if(uur.dateOfBirth() != null)
+            userDetails.setDateOfBirth(uur.dateOfBirth());
+        if(uur.phoneNumber() != null)
+            userDetails.setPhoneNumber(uur.phoneNumber());
+        return userDetails;
     }
 
     public UserUpdationResponse toUserUpdationResponse(UserDetails userDetails) {
