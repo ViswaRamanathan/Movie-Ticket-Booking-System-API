@@ -42,9 +42,7 @@ public class UserServiceImpl implements UserService {
     public UserUpdationResponse updateUser(String email, UserUpdationRequest userUpdationRequest) {
         if(userRepository.existsByEmail(email)) {
             UserDetails userDetails = userRepository.findByEmail(email);
-            userDetails.setUsername(userUpdationRequest.username());
-            userDetails.setDateOfBirth(userUpdationRequest.dateOfBirth());
-            userDetails.setPhoneNumber(userUpdationRequest.phoneNumber());
+            userDetails = userUpdationMapper.toUserDetails(userUpdationRequest);
             return userUpdationMapper.toUserUpdationResponse(userRepository.save(userDetails));
         }
         else{

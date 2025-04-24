@@ -28,7 +28,7 @@ public class UserController {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<ResponseStructure<UserUpdationResponse>> updateUser(String email, @RequestBody UserUpdationRequest userUpdationRequest) {
+    public ResponseEntity<ResponseStructure<UserUpdationResponse>> updateUser(@RequestParam String email, @RequestBody UserUpdationRequest userUpdationRequest) {
         return ResponseBuilder.successResponse(userService.updateUser(email, userUpdationRequest), "User updated successfully", HttpStatus.OK);
     }
 }
