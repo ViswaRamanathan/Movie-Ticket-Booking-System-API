@@ -13,9 +13,12 @@ public class UserUpdationMapper {
 
     public UserDetails toUserDetails(UserUpdationRequest uur) {
         UserDetails userDetails = new UserDetails();
-        userDetails.setUsername(uur.username());
-        userDetails.setDateOfBirth(uur.dateOfBirth());
-        userDetails.setPhoneNumber(uur.phoneNumber());
+        if(uur.username() != null)
+            userDetails.setUsername(uur.username());
+        if(uur.dateOfBirth() != null)
+            userDetails.setDateOfBirth(uur.dateOfBirth());
+        if(uur.phoneNumber() != null)
+            userDetails.setPhoneNumber(uur.phoneNumber());
         return userDetails;
     }
 
