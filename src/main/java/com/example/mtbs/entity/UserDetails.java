@@ -2,11 +2,10 @@ package com.example.mtbs.entity;
 
 import com.example.mtbs.enums.Role;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 import java.time.LocalDate;
 
@@ -14,6 +13,8 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @Inheritance(strategy = InheritanceType.JOINED)
+@SQLDelete(sql = "update userdetails set deleted = true where email = ?")
+@Where(clause = "deleted  = false")
 public class UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -31,6 +32,7 @@ public class UserDetails {
     private LocalDate dateOfBirth;
     private long createdAt;
     private long updatedAt;
-
+    private boolean deleted = false;
+    private long deletedAt;
 
 }

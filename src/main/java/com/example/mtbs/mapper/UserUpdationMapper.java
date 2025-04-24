@@ -1,6 +1,5 @@
 package com.example.mtbs.mapper;
 
-import com.example.mtbs.dto.UserRegistrationRequest;
 import com.example.mtbs.dto.UserUpdationRequest;
 import com.example.mtbs.dto.UserUpdationResponse;
 import com.example.mtbs.entity.TheaterOwner;
