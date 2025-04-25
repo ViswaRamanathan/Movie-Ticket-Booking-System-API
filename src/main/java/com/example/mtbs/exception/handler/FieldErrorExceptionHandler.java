@@ -25,7 +25,7 @@ public class FieldErrorExceptionHandler extends ResponseEntityExceptionHandler {
         List<CustomFieldError> customFieldErrorList = new ArrayList<>();
         for(ObjectError objectError : objectErrors){
             FieldError fieldError = (FieldError) objectError;
-            CustomFieldError customFieldError = new CustomFieldError(fieldError.getField(), fieldError.getRejectedValue(), "Can not be null");
+            CustomFieldError customFieldError = new CustomFieldError(fieldError.getField(), fieldError.getRejectedValue(), fieldError.getDefaultMessage());
             customFieldErrorList.add(customFieldError);
         }
         ErrorStructure<List<CustomFieldError>> errorResponse = ErrorStructure.<List<CustomFieldError>>builder()
