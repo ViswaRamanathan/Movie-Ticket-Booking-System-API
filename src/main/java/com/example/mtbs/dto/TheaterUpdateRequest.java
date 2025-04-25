@@ -2,13 +2,11 @@ package com.example.mtbs.dto;
 
 import com.example.mtbs.entity.TheaterOwner;
 
-public record TheaterRegistrationResponse(
+public record TheaterUpdateRequest(
         String name,
-        String createdBy,
         String address,
         String city,
         String landmark,
-        long createdAt,
-        long updatedAt
+        String email
 ) {
 }

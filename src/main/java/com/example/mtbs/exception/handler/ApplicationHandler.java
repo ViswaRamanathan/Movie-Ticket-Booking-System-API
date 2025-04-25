@@ -1,5 +1,6 @@
 package com.example.mtbs.exception.handler;
 
+import com.example.mtbs.exception.TheaterDoesNotExistException;
 import com.example.mtbs.exception.UserAlreadyExistByEmailException;
 import com.example.mtbs.exception.UserDoesNotExistByEmailException;
 import com.example.mtbs.utility.ErrorStructure;
@@ -26,6 +27,11 @@ public class ApplicationHandler {
     @ExceptionHandler
     public ResponseEntity<ErrorStructure<String>> handleUserDoesNotExistByEmailException(UserDoesNotExistByEmailException ue){
         return ResponseBuilder.errorResponse(ue.getMessage(), "Email does not exist", HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<ErrorStructure<String>> handleTheaterDoesNotExistByEmailException(TheaterDoesNotExistException ue){
+        return ResponseBuilder.errorResponse(ue.getMessage(), "No Theater found ", HttpStatus.NOT_FOUND);
     }
 
 }
