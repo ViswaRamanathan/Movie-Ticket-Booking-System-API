@@ -15,7 +15,7 @@ import java.time.LocalDate;
 @Inheritance(strategy = InheritanceType.JOINED)
 @SQLDelete(sql = "update userdetails set deleted = true where email = ?")
 @Where(clause = "deleted  = false")
-public class UserDetails {
+public class UserDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String userId;

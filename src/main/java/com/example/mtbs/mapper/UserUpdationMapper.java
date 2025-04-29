@@ -2,32 +2,30 @@ package com.example.mtbs.mapper;
 
 import com.example.mtbs.dto.UserUpdationRequest;
 import com.example.mtbs.dto.UserUpdationResponse;
-import com.example.mtbs.entity.TheaterOwner;
-import com.example.mtbs.entity.User;
-import com.example.mtbs.entity.UserDetails;
+import com.example.mtbs.entity.UserDetail;
 import org.springframework.stereotype.Component;
 
 @Component
 public class UserUpdationMapper {
 
-    public UserDetails toUserDetails(UserUpdationRequest uur) {
-        UserDetails userDetails = new UserDetails();
+    public UserDetail toUserDetails(UserUpdationRequest uur) {
+        UserDetail userDetail = new UserDetail();
         if(uur.username() != null)
-            userDetails.setUsername(uur.username());
+            userDetail.setUsername(uur.username());
         if(uur.dateOfBirth() != null)
-            userDetails.setDateOfBirth(uur.dateOfBirth());
+            userDetail.setDateOfBirth(uur.dateOfBirth());
         if(uur.phoneNumber() != null)
-            userDetails.setPhoneNumber(uur.phoneNumber());
-        return userDetails;
+            userDetail.setPhoneNumber(uur.phoneNumber());
+        return userDetail;
     }
 
-    public UserUpdationResponse toUserUpdationResponse(UserDetails userDetails) {
+    public UserUpdationResponse toUserUpdationResponse(UserDetail userDetail) {
         return new UserUpdationResponse(
-                userDetails.getUserId(),
-                userDetails.getUsername(),
-                userDetails.getPhoneNumber(),
-                userDetails.getDateOfBirth(),
-                userDetails.getUpdatedAt()
+                userDetail.getUserId(),
+                userDetail.getUsername(),
+                userDetail.getPhoneNumber(),
+                userDetail.getDateOfBirth(),
+                userDetail.getUpdatedAt()
         );
     }
 }
